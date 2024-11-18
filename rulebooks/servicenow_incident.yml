@@ -8,23 +8,23 @@
     - name: webhook from servicenow business rules
       ansible.eda.webhook:
         host: 0.0.0.0
-        port: 5000
+        port: 443
       filters:
        - ansible.eda.normalize_keys:
 
-  ## OS Service Monitoring
+  ## Hello world
 
   rules:
-    - name: Linux EDA Service restarts
-      condition: event.payload.number is defined and event.payload.description is search("Linux Service is not running", ignorecase=true)
+    - name: Hello world
+      condition: event.payload.number is defined and event.payload.description is search("Print Hello world", ignorecase=true) and event.payload.ci is "RH123456789"
       action:
         run_job_template:
-          name: Linux EDA Restart Service
+          name: Hello world
           organization: Default
 
-    - name: Linux EDA disk pressure
-      condition: event.payload.number is defined and event.payload.description is search("Linux Filesystem", ignorecase=true)
-      action:
-        run_job_template:
-          name: Linux EDA Filesystem
-          organization: Default
+    # - name: Linux EDA disk pressure
+    #   condition: event.payload.number is defined and event.payload.description is search("Linux Filesystem", ignorecase=true)
+    #   action:
+    #     run_job_template:
+    #       name: Linux EDA Filesystem
+    #       organization: Default
