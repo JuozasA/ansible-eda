@@ -7,9 +7,11 @@
   sources:
     - name: webhook from servicenow business rules
       ansible.eda.webhook:
-        host: 127.0.0.1
+        host: 0.0.0.0
         port: 5000
         log_level: DEBUG
+        path: /webhook         # Webhook path
+        verify_ssl: false      # Disable SSL for local testing (use true for production)
       filters:
        - ansible.eda.normalize_keys:
 
