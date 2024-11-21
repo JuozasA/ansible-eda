@@ -9,11 +9,10 @@
       ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
-        log_level: DEBUG
-        path: /webhook         # Webhook path
+        log_level: DEBUG       # Webhook path
         verify_ssl: false      # Disable SSL for local testing (use true for production)
-      filters:
-       - ansible.eda.normalize_keys:
+#      filters:
+#       - ansible.eda.normalize_keys:
 
   ## Hello world
 
