@@ -1,6 +1,6 @@
 ---
 - name: listen for incidents from ServiceNow
-  hosts: all
+  hosts: localhost
 
   ## Define our source for events
 
