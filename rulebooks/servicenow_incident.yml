@@ -1,5 +1,5 @@
 ---
-- name: listen for incidents from ServiceNow
+- name: listen for incidents from ServiceNows
   hosts: localhost
 
   ## Define our source for events
@@ -8,7 +8,7 @@
     - name: webhook from servicenow business rules
       ansible.eda.webhook:
         host: 127.0.0.1
-        port: 5000
+        port: 6000
         log_level: DEBUG       
         verify_ssl: false      # Disable SSL for local testing (use true for production)
       filters:
