@@ -18,10 +18,10 @@
 
   rules:
     - name: Hello world
-      condition: event.payload.number is defined and event.payload.description is search("Print Hello world", ignorecase=true) and event.payload.ci is "RH123456789"
+      condition: event.payload.number is defined and event.payload.description is search("Print Hello world", ignorecase=true)
       action:
         run_job_template:
-          name: Hello world
+          name: 'Hello world'
           organization: Default
 
     # - name: Linux EDA disk pressure
