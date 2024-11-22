@@ -2,8 +2,11 @@
 
 - name: hello world
   hosts: localhost
-  gather_facts: no
   tasks:
+    - name: Print the webhook payload
+      debug:
+        var: event_payload
+        
   - name: Hello world
     debug:
       msg: "Hello world {{ event_payload.number }}, {{ event_payload.ci_name }}, {{ event_payload.description }}"
