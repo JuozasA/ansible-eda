@@ -9,6 +9,7 @@
       ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
+        token: '{{ lookup('ansible.builtin.env', 'TOKEN') }}'
       filters:
        - ansible.eda.normalize_keys:
 
