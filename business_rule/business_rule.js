@@ -16,10 +16,11 @@
         r.setRequestHeader("Content-Type", "application/json");
 
         // Get data from Incident record
-
+	var ci = new GlideRecord('cmdb_ci');
+	ci.get('sys_id', current.getValue("cmdb_ci"));
+	var cmdb_ci = ci.getValue('name');
         var number = current.getValue("number");
         var short_description = current.getValue("short_description");
-	var cmdb_ci = current.getValue("cmdb_ci");
 
         var obj = {
             "number": number,
