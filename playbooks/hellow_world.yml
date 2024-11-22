@@ -6,4 +6,4 @@
   tasks:
   - name: Hello world
     debug:
-      msg: "Hello world {{ ansible_eda.event.payload.number }}, {{ ansible_eda.event.payload.ci_name }}, {{ ansible_eda.event.payload.description }}"
+      msg: "Hello world {{ event_payload.number }}, {{ event_payload.ci_name }}, {{ event_payload.description }}"
