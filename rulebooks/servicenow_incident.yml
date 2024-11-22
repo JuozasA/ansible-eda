@@ -22,8 +22,9 @@
         run_job_template:
           name: 'Hello world'
           organization: Default
-          extra_vars::
-            event_payload: "{{ event.payload }}"
+          job_args:
+            extra_vars:
+              event_payload: "{{ event.payload }}"
 
     # - name: Linux EDA disk pressure
     #   condition: event.payload.number is defined and event.payload.description is search("Linux Filesystem", ignorecase=true)
