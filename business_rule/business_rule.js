@@ -19,7 +19,7 @@
 
         var number = current.getValue("number");
         var short_description = current.getValue("short_description");
-		var cmdb_ci = current.getValue("cmdb_ci");
+	var cmdb_ci = current.getValue("cmdb_ci");
 
         var obj = {
             "number": number,
