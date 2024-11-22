@@ -2,10 +2,6 @@
 - name: hello world
   hosts: localhost
   tasks:
-    - name: Print the webhook payload
-      debug:
-        var: '{{ ansible_eda }}'
-        
     - name: Hello world
       debug:
-        msg: "{{ ansible_eda }}"
+        msg: "{{ ansible_eda.payload.number }}, {{ ansible_eda.payload.cmdb_ci }}, {{ ansible_eda.payload.description }}"
