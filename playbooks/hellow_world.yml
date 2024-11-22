@@ -4,7 +4,7 @@
   tasks:
     - name: Print the webhook payload
       debug:
-        var: {{ ansible_eda }}
+        var: '{{ ansible_eda }}'
         
     - name: Hello world
       debug:
