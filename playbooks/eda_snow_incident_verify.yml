@@ -12,16 +12,16 @@
       register: inc_info
 
     - debug:
-        msg: '{{ inc_info.records.[0] }}'
+        msg: '{{ inc_info.records[0] }}'
 
     - name: Check if payload and Incident information match and Incident is in New state (Ignore all other)
       fail:
         msg: >
           Supplied information and Incident information do not match! Workflow will not progress.
-      when: ansible_eda.event.payload.ci_id != inc_info.records.[0].cmdb_ci or ansible_eda.event.payload.description != inc_info.records.[0].short_description
+      when: ansible_eda.event.payload.ci_id != inc_info.records[0].cmdb_ci or ansible_eda.event.payload.description != inc_info.records[0].short_description
 
     - name: Both Incidents match. Continue with remediation
       debug:
         msg: >
           'Success! Both Incidents {{ ansible_eda.event.payload.number }} match. Continue with remediation'
-      when: ansible_eda.event.payload.ci_id == inc_info.records.[0].cmdb_ci and ansible_eda.event.payload.description == inc_info.records.[0].short_description
+      when: ansible_eda.event.payload.ci_id == inc_info.records[0].cmdb_ci and ansible_eda.event.payload.description == inc_info.records[0].short_description
