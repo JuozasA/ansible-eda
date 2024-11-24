@@ -2,6 +2,7 @@
 - name: Close ServiceNow Incident
   hosts: localhost
   gather_facts: no
+  connection: local
   collections:
     - servicenow.itsm
 

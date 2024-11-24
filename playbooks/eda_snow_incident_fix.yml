@@ -2,6 +2,7 @@
 - name: Move Incident to In Progress state and Fix
   hosts: localhost
   gather_facts: no
+  connection: local
   collections:
     - servicenow.itsm
 
