@@ -8,7 +8,6 @@
   tasks:
     - name: Ensure inventory exists
       infra.aap_configuration.inventories:
-        aap_hostname: localhost
         controller_inventories:
           name: "Hosts from ServiceNow"
           organization: "Default"
@@ -16,7 +15,6 @@
 
     - name: 'Ensure CI {{ ansible_eda.event.payload.ci_name }} exists in the Hosts from ServiceNow Inventory'
       infra.aap_configuration.hosts:
-        aap_hostname: localhost
         controller_inventories:
           name: '{{ ansible_eda.event.payload.ci_name }}'
           inventory: "Hosts from ServiceNow"
