@@ -1,7 +1,0 @@
----
-- name: hello world
-  hosts: localhost
-  tasks:
-    - name: Hello world
-      debug:
-        msg: "{{ ansible_eda.event.payload.ci_name }}, {{ ansible_eda.event.payload.number }}, {{ ansible_eda.event.payload.description }}"

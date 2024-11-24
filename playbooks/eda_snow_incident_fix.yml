@@ -1,0 +1,24 @@
+---
+- name: Move Incident to In Progress state and Fix
+  hosts: localhost
+  gather_facts: no
+  collections:
+    - servicenow.itsm
+
+  tasks:
+    - name: Move Incident to In Progress state
+      servicenow.itsm.incident:
+        number: '{{ ansible_eda.event.payload.number }}'
+        state: in_progress
+        other:
+          work_notes: "Event Driven Ansible is investigating"
+      delegate_to: localhost
+      register: update_incident
+      retries: 5
+      delay: 10
+      until: update_incident is not failed
+
+    - name: Hello world
+      debug:
+        msg: Printing "Hello world". Info from SNOW via EDA - "{{ ansible_eda.event.payload.ci_name }}, {{ ansible_eda.event.payload.number }}, {{ ansible_eda.event.payload.description }}"
+      register: message_for_snow

@@ -1,0 +1,18 @@
+- name: Move Incident to On Hold
+  hosts: localhost
+  gather_facts: no
+  collections:
+    - servicenow.itsm
+
+  tasks:
+    - name: Move Incident to On Hold for Assigned team to investigate further
+      servicenow.itsm.incident:
+        number: "{{ ansible_eda.event.payload.number }}"
+        state: on_hold
+        on_hold_reason: "EDA was not able to fix the issue. Moving Incident to On Hold for the team to investigate further"
+        other:
+          work_notes: "EDA was not able to fix the issue. Moving Incident to On Hold for the team to investigate further"
+      register: update_incident
+      retries: 5
+      delay: 10
+      until: update_incident is not failed

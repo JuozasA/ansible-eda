@@ -1,0 +1,21 @@
+---
+- name: Close ServiceNow Incident
+  hosts: localhost
+  gather_facts: no
+  collections:
+    - servicenow.itsm
+
+  tasks:
+    - name: Close ServiceNow Incident
+      servicenow.itsm.incident:
+        state: resolved
+        number: "{{ ansible_eda.event.payload.number }}"
+        close_code: "Solved (Permanently)"
+        close_notes: "{{ message_for_snow }}"
+        caller: admin
+        other:
+          work_notes: "{{ message_for_snow }}"
+      register: update_incident
+      retries: 5
+      delay: 10
+      until: update_incident is not failed
