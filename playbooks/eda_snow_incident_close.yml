@@ -8,10 +8,10 @@
         state: resolved
         number: "{{ ansible_eda.event.payload.number }}"
         close_code: "Solved (Permanently)"
-        close_notes: "{{ message_for_snow }}"
+        close_notes: "{{ message_for_snow.msg }}"
         caller: admin
         other:
-          work_notes: "{{ message_for_snow }}"
+          work_notes: "{{ message_for_snow.msg }}"
       register: update_incident
       retries: 5
       delay: 10
