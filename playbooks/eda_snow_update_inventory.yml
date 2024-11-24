@@ -2,9 +2,6 @@
 - name: Add CMDB CI to AAP Inventory if CI does not exist
   hosts: localhost
   gather_facts: no
-  collections:
-    - infra.aap_configuration
-
   tasks:
     - name: Ensure inventory exists
       infra.aap_configuration.inventories:

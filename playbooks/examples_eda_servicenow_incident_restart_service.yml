@@ -2,8 +2,6 @@
 - name: create incident in servicenow
   hosts: localhost
   gather_facts: no
-  collections:
-    - servicenow.itsm
 
   tasks:
   - name: create incident

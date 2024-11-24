@@ -2,9 +2,6 @@
 - name: Move Incident to In Progress state and Fix
   hosts: localhost
   gather_facts: no
-  collections:
-    - servicenow.itsm
-
   tasks:
     - name: Move Incident to In Progress state
       servicenow.itsm.incident:
