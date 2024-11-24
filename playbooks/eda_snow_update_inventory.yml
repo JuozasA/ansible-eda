@@ -2,7 +2,6 @@
 - name: Add CMDB CI to AAP Inventory if CI does not exist
   hosts: localhost
   gather_facts: no
-  connection: local
   collections:
     - infra.aap_configuration
 

@@ -2,7 +2,6 @@
 - name: Validating received Incident information with actual Incident info from SNOW
   hosts: localhost
   gather_facts: no
-  connection: local
   collections:
     - servicenow.itsm
 

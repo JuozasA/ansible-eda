@@ -1,7 +1,6 @@
 - name: Move Incident to On Hold
   hosts: localhost
   gather_facts: no
-  connection: local
   collections:
     - servicenow.itsm
 
