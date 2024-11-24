@@ -12,7 +12,7 @@
       register: inc_info
 
     - debug:
-        msg: '{{ inc_info.records }}'
+        msg: '{{ inc_info.records.[] }}'
 
     - name: Check if payload and Incident information match and Incident is in New state (Ignore all other)
       fail:
