@@ -16,8 +16,8 @@
   ## Hello world
 
   rules:
-    - name: Hello world
-      condition: event.payload.number is defined and event.payload.description is search("Print Hello world", ignorecase=true)
+    - name: Print Hello world in the Incident work nodes and Close
+      condition: event.payload.cmdb_ci is defined and event.payload.number is defined and event.payload.description is search("Print Hello world", ignorecase=true)
       action:
         run_job_template:
           name: 'Hello world'
