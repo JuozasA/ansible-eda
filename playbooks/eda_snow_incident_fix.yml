@@ -20,5 +20,5 @@
 
     - name: Hello world
       debug:
-        msg: Printing "Hello world". Info from SNOW via EDA - "{{ ansible_eda.event.payload.ci_name }}, {{ ansible_eda.event.payload.number }}, {{ ansible_eda.event.payload.description }}"
+        msg: Printing "Hello world". Info from SNOW via EDA - "{{ ansible_eda.event.payload.ci_name }}, {{ ansible_eda.event.payload.number }}, {{ ansible_eda.event.payload.ci_id }}"
       register: message_for_snow

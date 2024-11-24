@@ -22,11 +22,13 @@
         var cmdb_ci = ci.getValue('name');
         var number = current.getValue("number");
         var short_description = current.getValue("short_description");
+        var cmdb_ci_id = current.getValue("cmdb_ci");
 
         var obj = {
             "number": number,
             "description": short_description,
             "ci_name": cmdb_ci,
+            "ci_id": cmdb_ci_id,
         };
 
         var body = JSON.stringify(obj);
