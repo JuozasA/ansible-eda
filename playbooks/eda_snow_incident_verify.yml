@@ -11,6 +11,9 @@
         number: '{{ ansible_eda.event.payload.number }}'
       register: inc_info
 
+    - debug:
+        msg: '{{ inc_info }}'
+
     - name: Check if payload and Incident information match and Incident is in New state (Ignore all other)
       fail:
         msg: >
