@@ -7,7 +7,6 @@
       ansible.controller.inventory:
         name: "Hosts from ServiceNows"
         organization: "Default"
-        state: exists
 
     - name: 'Ensure CI {{ ansible_eda.event.payload.ci_name }} exists in the Hosts from ServiceNow Inventory'
       ansible.controller.host:
