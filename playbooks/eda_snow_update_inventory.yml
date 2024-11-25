@@ -5,7 +5,7 @@
   tasks:
     - name: Ensure inventory exists
       debug:
-        var: ansible_facts
+        var: hostvars
 
     - name: 'Ensure CI {{ ansible_eda.event.payload.ci_name }} exists in the Hosts from ServiceNow Inventory'
       ansible.controller.host:
