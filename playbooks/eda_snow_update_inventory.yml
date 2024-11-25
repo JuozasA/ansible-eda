@@ -14,3 +14,4 @@
         name: '{{ ansible_eda.event.payload.ci_name }}'
         inventory: "Hosts from ServiceNow"
         state: present
+        enabled: true
