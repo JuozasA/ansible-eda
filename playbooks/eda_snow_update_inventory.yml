@@ -5,7 +5,7 @@
   tasks:
     - name: Ensure inventory exists
       ansible.controller.inventory:
-        name: "Hosts from ServiceNow"
+        name: "Hosts from ServiceNows"
         organization: "Default"
         state: present
 
