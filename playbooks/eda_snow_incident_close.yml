@@ -11,7 +11,7 @@
         close_notes: "{{ message_for_snow.msg }}"
         caller: admin
         other:
-          work_notes: "{{ message_for_snow.msg }}"
+          work_notes: "{{ message_for_snow.stdout_lines }}"
       register: update_incident
       retries: 5
       delay: 10
