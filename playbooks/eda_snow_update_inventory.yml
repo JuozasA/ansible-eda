@@ -3,10 +3,10 @@
   hosts: localhost
   gather_facts: no
   tasks:
-    - job_list:
+    - ansible.controller.job_list:
         status: running
       register: testing_jobs
-      
+
     - name: Ensure inventory exists
       debug:
         var: testing_jobs
