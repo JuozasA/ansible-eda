@@ -6,12 +6,12 @@
     - name: Get the Inventory name from Running Job
       ansible.controller.job_list:
         status: running
-        query: {"playbook": "playbooks/eda_snow_update_inventory.yml"}
-      register: testing_jobs
+        query: {"name": "EDA SNOW Update Inventory"}
+      register: job_list
 
     - name: 'Ensure CI {{ ansible_eda.event.payload.ci_name }} exists in the Hosts from ServiceNow Inventory'
       ansible.controller.host:
         name: '{{ ansible_eda.event.payload.ci_name }}'
-        inventory: "Hosts from ServiceNow"
+        inventory: "{{ job_list.results[0].summary_fields.inventory.name }}"
         state: present
         enabled: true
