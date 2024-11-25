@@ -1,12 +1,11 @@
 ---
 - name: Add CMDB CI to AAP Inventory if CI does not exist
   hosts: localhost
-  gather_facts: no
+  gather_facts: yes
   tasks:
     - name: Ensure inventory exists
-      ansible.controller.inventory:
-        name: "Hosts from ServiceNows"
-        organization: "Default"
+      debug:
+        var: ansible_facts
 
     - name: 'Ensure CI {{ ansible_eda.event.payload.ci_name }} exists in the Hosts from ServiceNow Inventory'
       ansible.controller.host:
