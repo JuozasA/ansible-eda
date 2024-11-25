@@ -3,13 +3,11 @@
   hosts: localhost
   gather_facts: no
   tasks:
-    - ansible.controller.job_list:
+    - name: Get the Inventory name from Running Job
+      ansible.controller.job_list:
         status: running
+        query: {"playbook": "playbooks/eda_snow_update_inventory.yml"}
       register: testing_jobs
-
-    - name: Ensure inventory exists
-      debug:
-        var: testing_jobs
 
     - name: 'Ensure CI {{ ansible_eda.event.payload.ci_name }} exists in the Hosts from ServiceNow Inventory'
       ansible.controller.host:
