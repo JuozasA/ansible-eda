@@ -3,3 +3,4 @@ collections:
   - name: ansible.controller
     version: 4.5.11
   - name: servicenow.itsm
+  - name: ansible.posix

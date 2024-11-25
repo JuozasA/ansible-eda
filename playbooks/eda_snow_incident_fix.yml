@@ -1,6 +1,6 @@
 ---
 - name: Move Incident to In Progress state and Fix
-  hosts: localhost
+  hosts: '{{ ansible_eda.event.payload.ci_name }}'
   gather_facts: no
   tasks:
     - name: Move Incident to In Progress state
@@ -9,17 +9,26 @@
         state: in_progress
         other:
           work_notes: "Event Driven Ansible is investigating"
+      delegate_to: localhost
       register: update_incident
       retries: 5
       delay: 10
       until: update_incident is not failed
 
-    - name: Hello world
-      debug:
-        msg: Printing "Hello world". Info from SNOW via EDA - "{{ ansible_eda.event.payload.ci_name }}, {{ ansible_eda.event.payload.number }}, {{ ansible_eda.event.payload.ci_id }}"
-      register: message_for_snow
+    - name: Check if firewalld is running
+      ansible.builtin.service:
+        name: firewalld
+        state: started
 
-    - name: "Export variable"
-      set_stats:
-        data:
-          message_for_snow:  '{{ message_for_snow }}'
+    - name: Get port number
+      ansible.builtin.set_fact:
+        port_number: "{{ ansible_eda.event.payload.description | regex_search('[0-9]+') }}"
+
+    - name: 'Open port {{ port_number }} with firewalld (permanent)'
+      ansible.posix.firewalld:
+        port: '{{ port_number }}/tcp'
+        permanent: true
+        state: enabled
+
+    - name: Reload firewalld to apply changes
+      command: firewall-cmd --reload
