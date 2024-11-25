@@ -4,13 +4,13 @@
   gather_facts: no
   tasks:
     - name: Ensure inventory exists
-      inventory:
+      ansible.controller.inventory:
         name: "Hosts from ServiceNow"
         organization: "Default"
         state: present
 
     - name: 'Ensure CI {{ ansible_eda.event.payload.ci_name }} exists in the Hosts from ServiceNow Inventory'
-      host:
+      ansible.controller.host:
         name: '{{ ansible_eda.event.payload.ci_name }}'
         inventory: "Hosts from ServiceNow"
         state: present
