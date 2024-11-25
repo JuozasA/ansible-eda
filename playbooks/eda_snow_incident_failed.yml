@@ -1,0 +1,14 @@
+---
+- name: Add work notes on why EDA workflow stopped
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Update work notes
+      servicenow.itsm.incident:
+        number: '{{ ansible_eda.event.payload.number }}'
+        other:
+          work_notes: "Ansible was not able to add {{ ansible_eda.event.payload.ci_name }} CI to the Inventory"
+      register: update_incident
+      retries: 5
+      delay: 10
+      until: update_incident is not failed

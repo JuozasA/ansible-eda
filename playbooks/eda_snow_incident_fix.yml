@@ -9,7 +9,6 @@
         state: in_progress
         other:
           work_notes: "Event Driven Ansible is investigating"
-      delegate_to: localhost
       register: update_incident
       retries: 5
       delay: 10
