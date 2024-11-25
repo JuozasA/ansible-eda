@@ -30,5 +30,19 @@
         permanent: true
         state: enabled
 
-    - name: Reload firewalld to apply changes
-      command: firewall-cmd --reload
+    - name: Check if firewalld is running
+      ansible.builtin.service:
+        name: firewalld
+        state: reloaded
+
+    - name: get service status
+      ansible.builtin.command:
+        cmd: systemctl status firewalld
+      register: service_status
+
+    - name: "Export variable"
+      set_stats:
+        data:
+          message_for_snow:  '{{ service_status }}'
+
+  
