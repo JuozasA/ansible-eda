@@ -10,8 +10,8 @@
         host: 0.0.0.0
         port: 5000
         token: '{{ token }}'
-        certfile: '/etc/pki/server.cert'
-        keyfile: '/etc/pki/server.key'
+ #       certfile: '/etc/pki/server.cert'
+ #       keyfile: '/etc/pki/server.key'
       filters:
        - ansible.eda.normalize_keys:
 
