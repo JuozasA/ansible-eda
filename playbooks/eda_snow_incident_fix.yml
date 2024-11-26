@@ -37,7 +37,7 @@
 
     - name: get service status
       ansible.builtin.command:
-        cmd: systemctl status firewalld
+        cmd: firewall-cmd --list-all
       register: service_status
 
     - name: "Export variable"
