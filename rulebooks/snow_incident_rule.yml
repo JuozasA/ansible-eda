@@ -10,8 +10,8 @@
         host: 0.0.0.0
         port: 5000
         token: '{{ token }}'
-        certfile: '/home/runner/server.cert'
-        keyfile: '/home/runner/server.key'
+        certfile: '/runner/server.cert'
+        keyfile: '/runner/server.key'
       filters:
        - ansible.eda.normalize_keys:
 
