@@ -12,8 +12,6 @@
         token: '{{ token }}'
         certfile: '/etc/pki/server.crt'
         keyfile: '/etc/pki/server.key'
-      filters:
-       - ansible.eda.normalize_keys:
 
   ## Hello world
 
