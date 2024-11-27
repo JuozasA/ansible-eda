@@ -15,10 +15,10 @@
       fail:
         msg: >
           Supplied information and Incident information do not match! Workflow will not progress.
-      when: ansible_eda.event.payload.ci_id != inc_info.records[0].cmdb_ci or ansible_eda.event.payload.description != inc_info.records[0].short_description
+      when: ansible_eda.event.payload.ci_id != inc_info.records[0].cmdb_ci or ansible_eda.event.payload.description != inc_info.records[0].short_description or inc_info.records[0].state is not search("new")
 
     - name: Both Incidents match. Continue with remediation
       debug:
         msg: >
           'Success! Both Incidents {{ ansible_eda.event.payload.number }} match. Continue with remediation'
-      when: ansible_eda.event.payload.ci_id == inc_info.records[0].cmdb_ci and ansible_eda.event.payload.description == inc_info.records[0].short_description
+      when: ansible_eda.event.payload.ci_id == inc_info.records[0].cmdb_ci and ansible_eda.event.payload.description == inc_info.records[0].short_description and inc_info.records[0].state is search("new")
