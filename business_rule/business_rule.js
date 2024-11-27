@@ -10,7 +10,7 @@
 
         var r = new sn_ws.RESTMessageV2();
         // Enter EDA URL and port number here. In this one we have eda.example.com port 5000.
-        r.setEndpoint("http://ec2-18-170-28-29.eu-west-2.compute.amazonaws.com:5000/endpoint");
+        r.setEndpoint("https://eda.amazonaws.com:5000/endpoint");
         r.setHttpMethod("post");
         r.setRequestHeader("Authorization", "Bearer " + token);
         r.setRequestHeader("Content-Type", "application/json");
