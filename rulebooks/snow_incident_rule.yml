@@ -15,13 +15,7 @@
 
   rules:
     - name: Open firewall port 8080
-      condition: 
-        all:
-          - event.payload.ci_name is defined
-          - event.payload.number is defined
-          - event.payload.description is search("firewall", ignorecase=true)
-          - event.payload.description is search("port", ignorecase=true)
-          - event.payload.description is search("open", ignorecase=true)
+      condition: event.payload.ci_name is defined and event.payload.number is defined and event.payload.description is search("firewall", ignorecase=true) and event.payload.description is search("port", ignorecase=true) and event.payload.description is search("open", ignorecase=true)
       action:
         run_workflow_template:
           name: 'Hello world'
