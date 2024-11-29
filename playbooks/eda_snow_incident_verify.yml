@@ -19,3 +19,5 @@
         msg: >
           'Success! Both Incidents {{ ansible_eda.event.payload.number }} match. Continue with remediation'
       when: ansible_eda.event.payload.ci_id == inc_info.records[0].cmdb_ci and ansible_eda.event.payload.description == inc_info.records[0].short_description and inc_info.records[0].state is search("new")
+
+
