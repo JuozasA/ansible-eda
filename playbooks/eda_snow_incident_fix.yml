@@ -24,6 +24,12 @@
       ansible.builtin.set_fact:
         port_number: "{{ ansible_eda.event.payload.description | regex_search('[0-9]+') }}"
 
+    - name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)
+      ansible.builtin.yum:
+        name:
+          - firewalld
+        state: present
+        
     - name: 'Open port {{ port_number }} with firewalld (permanent)'
       firewalld:
         port: '{{ port_number }}/tcp'
