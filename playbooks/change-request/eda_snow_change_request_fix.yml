@@ -47,6 +47,12 @@
         data:
           message_for_snow: 'All tasks are Closed'
 
+    - name: "Export variable"
+      set_stats:
+        data:
+          message_for_snow: "{{ item.number }}"
+      loop: "{{ task_number.records }}"
+
     - name: Close a change task
       servicenow.itsm.change_request_task:
         state: closed
