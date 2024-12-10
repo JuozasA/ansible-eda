@@ -1,68 +1,68 @@
 ---
 - name: Move Incident to In Progress state and Fix
-  hosts: '{{ ansible_eda.event.payload.ci_name }}'
+  hosts: localhost
   gather_facts: no
   tasks:
 
     - name: Change state of the change task
       servicenow.itsm.change_request_task:
-        state: in_progress
-        on_hold: false
-        number: CTASK0000001
-
-    - name: Move Incident to In Progress state
-      servicenow.itsm.incident:
-        number: '{{ ansible_eda.event.payload.number }}'
-        state: in_progress
-        other:
-          work_notes: "Event Driven Ansible is investigating"
+        query:
+          - change_request.value: "{{ cr_id }}"
       delegate_to: localhost
-      register: update_incident
-      retries: 5
-      delay: 10
-      until: update_incident is not failed
 
-    - name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)
-      ansible.builtin.yum:
-        name:
-          - firewalld
-        state: present
+    # - name: Move Incident to In Progress state
+    #   servicenow.itsm.incident:
+    #     number: '{{ ansible_eda.event.payload.number }}'
+    #     state: in_progress
+    #     other:
+    #       work_notes: "Event Driven Ansible is investigating"
+    #   delegate_to: localhost
+    #   register: update_incident
+    #   retries: 5
+    #   delay: 10
+    #   until: update_incident is not failed
+
+    # - name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)
+    #   ansible.builtin.yum:
+    #     name:
+    #       - firewalld
+    #     state: present
         
-    - name: Check if firewalld is running
-      ansible.builtin.service:
-        name: firewalld
-        state: started
+    # - name: Check if firewalld is running
+    #   ansible.builtin.service:
+    #     name: firewalld
+    #     state: started
 
-    - name: Get port number
-      ansible.builtin.set_fact:
-        port_number: "{{ ansible_eda.event.payload.description | regex_search('[0-9]+') }}"
+    # - name: Get port number
+    #   ansible.builtin.set_fact:
+    #     port_number: "{{ ansible_eda.event.payload.description | regex_search('[0-9]+') }}"
     
-    - name: 'Open port {{ port_number }} with firewalld (permanent)'
-      firewalld:
-        port: '{{ port_number }}/tcp'
-        permanent: true
-        state: enabled
+    # - name: 'Open port {{ port_number }} with firewalld (permanent)'
+    #   firewalld:
+    #     port: '{{ port_number }}/tcp'
+    #     permanent: true
+    #     state: enabled
 
-    - name: Check if firewalld is running
-      ansible.builtin.service:
-        name: firewalld
-        state: reloaded
+    # - name: Check if firewalld is running
+    #   ansible.builtin.service:
+    #     name: firewalld
+    #     state: reloaded
 
-    - name: get service status
-      ansible.builtin.command:
-        cmd: firewall-cmd --list-all
-      register: service_status
+    # - name: get service status
+    #   ansible.builtin.command:
+    #     cmd: firewall-cmd --list-all
+    #   register: service_status
 
-    - name: "Export variable"
-      set_stats:
-        data:
-          message_for_snow:  '{{ service_status }}'
+    # - name: "Export variable"
+    #   set_stats:
+    #     data:
+    #       message_for_snow:  '{{ service_status }}'
 
-    - name: Close a change task
-      servicenow.itsm.change_request_task:
-        state: closed
-        close_code: "successful"
-        close_notes: "Closed"
-        number: CTASK0000001
+    # - name: Close a change task
+    #   servicenow.itsm.change_request_task:
+    #     state: closed
+    #     close_code: "successful"
+    #     close_notes: "Closed"
+    #     number: CTASK0000001
 
   
