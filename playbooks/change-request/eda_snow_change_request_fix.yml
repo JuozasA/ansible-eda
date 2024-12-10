@@ -9,6 +9,7 @@
         query:
           - change_request: = {{ ansible_eda.event.payload.cr_id }}
       delegate_to: localhost
+      register: task_number
 
     # - name: Move Incident to In Progress state
     #   servicenow.itsm.incident:
@@ -58,11 +59,12 @@
     #     data:
     #       message_for_snow:  '{{ service_status }}'
 
-    # - name: Close a change task
-    #   servicenow.itsm.change_request_task:
-    #     state: closed
-    #     close_code: "successful"
-    #     close_notes: "Closed"
-    #     number: CTASK0000001
+     - name: Close a change task
+       servicenow.itsm.change_request_task:
+         state: closed
+         close_code: "successful"
+         close_notes: "Closed"
+         number: item.number
+      loop: "{{ task_number.results }}"
 
   
