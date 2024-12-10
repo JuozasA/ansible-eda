@@ -23,12 +23,14 @@
         var number = current.getValue("number");
         var short_description = current.getValue("short_description");
         var cmdb_ci_id = current.getValue("cmdb_ci");
+        var cr_id = current.getValue("sys_id");
 
         var obj = {
             "number": number,
             "description": short_description,
             "ci_name": cmdb_ci,
             "ci_id": cmdb_ci_id,
+            "cr_id": cr_id,
         };
 
         var body = JSON.stringify(obj);
