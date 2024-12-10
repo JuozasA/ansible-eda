@@ -7,7 +7,7 @@
     - name: Change state of the change task
       servicenow.itsm.change_request_task:
         query:
-          - change_request.value: "{{ cr_id }}"
+          - change_request.value: "{{ ansible_eda.event.payload.cr_id }}"
       delegate_to: localhost
 
     # - name: Move Incident to In Progress state
