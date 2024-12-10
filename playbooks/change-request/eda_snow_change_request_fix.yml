@@ -64,7 +64,7 @@
         state: closed
         close_code: "successful"
         close_notes: "Closed"
-        number: item.number
+        number: "{{ item.number }}"
       loop: "{{ task_number.results }}"
 
   
