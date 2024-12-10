@@ -53,7 +53,7 @@
         close_code: "successful"
         close_notes: "Closed"
         number: "{{ item.number }}"
-        change_request: "{{ ansible_eda.event.payload.cr_id }}"
+        change_request_id: "{{ ansible_eda.event.payload.cr_id }}"
       loop: "{{ task_number.records }}"
 
   
