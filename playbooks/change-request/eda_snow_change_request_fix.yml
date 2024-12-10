@@ -59,12 +59,12 @@
     #     data:
     #       message_for_snow:  '{{ service_status }}'
 
-     - name: Close a change task
-       servicenow.itsm.change_request_task:
-         state: closed
-         close_code: "successful"
-         close_notes: "Closed"
-         number: item.number
+    - name: Close a change task
+      servicenow.itsm.change_request_task:
+        state: closed
+        close_code: "successful"
+        close_notes: "Closed"
+        number: item.number
       loop: "{{ task_number.results }}"
 
   
