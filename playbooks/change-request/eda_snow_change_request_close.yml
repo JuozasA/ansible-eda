@@ -1,0 +1,15 @@
+---
+- name: Close ServiceNow Change Request
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Close ServiceNow Change Request
+      servicenow.itsm.change_request:
+        state: closed
+        number: "{{ ansible_eda.event.payload.number }}"
+        close_code: "successful"
+        close_notes: "{{ message_for_snow.stdout_lines | join('\n') }}"
+      register: update_change_request
+      retries: 5
+      delay: 10
+      until: update_change_request is not failed

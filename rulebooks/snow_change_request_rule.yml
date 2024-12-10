@@ -1,5 +1,5 @@
 ---
-- name: listen for incidents from ServiceNow
+- name: listen for change requests from ServiceNow
   hosts: all
 
   ## Define our source for events

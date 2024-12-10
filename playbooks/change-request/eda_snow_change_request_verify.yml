@@ -1,0 +1,21 @@
+---
+- name: Validating received Change Request information with the actual Change Request info from SNOW
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: 'Retrieve CR {{ ansible_eda.event.payload.number }} info'
+      servicenow.itsm.change_request_info:
+        number: '{{ ansible_eda.event.payload.number }}'
+      register: cr_info
+
+    - name: Check if payload and Change Request information match and Change Request is in In-Progress state (Ignore all other)
+      fail:
+        msg: >
+          Supplied information and Change Request information do not match! Workflow will not progress.
+      when: ansible_eda.event.payload.ci_id != cr_info.records[0].cmdb_ci or ansible_eda.event.payload.description != cr_info.records[0].description or cr_info.records[0].phase_state is not search("implement")
+
+    - name: Both Change Requests match. Continue with remediation
+      debug:
+        msg: >
+          'Success! Both Change Requests {{ ansible_eda.event.payload.number }} match. Continue with remediation'
+      when: ansible_eda.event.payload.ci_id == cr_info.records[0].cmdb_ci and ansible_eda.event.payload.description == cr_info.records[0].description and cr_info.records[0].phase_state is search("implement")

@@ -5,7 +5,7 @@
   tasks:
     - name: Close ServiceNow Incident
       servicenow.itsm.incident:
-        state: closed
+        state: resolved
         number: "{{ ansible_eda.event.payload.number }}"
         close_code: "Solved (Permanently)"
         close_notes: "{{ message_for_snow.stdout_lines | join('\n') }}"
