@@ -47,22 +47,12 @@
         data:
           message_for_snow: 'All tasks are Closed'
 
-    - name: "Export variable"
-      set_stats:
-        data:
-          message_for_snow: "{{ task_number.records }}"
-
     - name: Close a change task
       servicenow.itsm.change_request_task:
         state: closed
-        change_request_id: "{{ ansible_eda.event.payload.cr_id }}"
         close_code: "successful"
         close_notes: "Closed"
         number: "{{ item.number }}"
       loop: "{{ task_number.records }}"
-      register: update_change_request
-      retries: 5
-      delay: 10
-      until: update_change_request is not failed
 
   
