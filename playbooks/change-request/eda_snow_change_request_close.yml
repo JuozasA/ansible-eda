@@ -8,7 +8,7 @@
         state: closed
         number: "{{ ansible_eda.event.payload.number }}"
         close_code: "successful"
-        close_notes: "{{ message_for_snow.stdout_lines | join('\n') }}"
+        close_notes: "{{ message_for_snow }}"
       register: update_change_request
       retries: 5
       delay: 10
