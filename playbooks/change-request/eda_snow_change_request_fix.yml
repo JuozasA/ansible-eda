@@ -1,12 +1,13 @@
 ---
-- name: Move Incident to In Progress state and Fix
+- name: Move CR Task to In Progress state and Fix
   hosts: localhost
   gather_facts: no
   tasks:
 
     - name: Change state of the change task
-      servicenow.itsm.change_request_task:
-        change_request_number: "{{ ansible_eda.event.payload.number }}"
+      servicenow.itsm.change_request_task_info:
+        query:
+          - change_request.value: = "{{ ansible_eda.event.payload.cr_id }}"
       delegate_to: localhost
 
     # - name: Move Incident to In Progress state
