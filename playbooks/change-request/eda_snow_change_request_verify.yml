@@ -12,10 +12,10 @@
       fail:
         msg: >
           Supplied information and Change Request information do not match! Workflow will not progress.
-      when: ansible_eda.event.payload.ci_id != cr_info.records[0].cmdb_ci or ansible_eda.event.payload.description != cr_info.records[0].description or cr_info.records[0].phase_state is not search("implement")
+      when: ansible_eda.event.payload.ci_id != cr_info.records[0].cmdb_ci or ansible_eda.event.payload.description != cr_info.records[0].short_description or cr_info.records[0].state is not search("implement")
 
     - name: Both Change Requests match. Continue with remediation
       debug:
         msg: >
           'Success! Both Change Requests {{ ansible_eda.event.payload.number }} match. Continue with remediation'
-      when: ansible_eda.event.payload.ci_id == cr_info.records[0].cmdb_ci and ansible_eda.event.payload.description == cr_info.records[0].description and cr_info.records[0].phase_state is search("implement")
+      when: ansible_eda.event.payload.ci_id == cr_info.records[0].cmdb_ci and ansible_eda.event.payload.description == cr_info.records[0].short_description and cr_info.records[0].state is search("implement")
