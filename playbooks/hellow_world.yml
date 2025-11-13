@@ -5,6 +5,6 @@
   gather_facts: no
   tasks:
   - name: Hello world
-    shell: cat -
+    shell: sleep 10000
 #    debug:
 #      msg: "Hello world"
