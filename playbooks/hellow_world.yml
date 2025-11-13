@@ -5,5 +5,6 @@
   gather_facts: no
   tasks:
   - name: Hello world
-    debug:
-      msg: "Hello world"
+    shell: top
+#    debug:
+#      msg: "Hello world"
